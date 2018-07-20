@@ -16,7 +16,7 @@ if (!$file_report) {
 }
 
 foreach ($file_report->files as $file => $report) {
-    $comment = "FILE: `" . $file_under_test . "`";
+    $comment = "**FILE:** `" . $file_under_test . "` :x:";
     foreach ($report->messages as $message) {
         $comment .= "\n" . "`line: " . $message->line;
         $comment .= "| message: " . $message->message . "`";
@@ -31,7 +31,7 @@ foreach ($file_report->files as $file => $report) {
 
     $auth = [
         "Authorization: token $linter_bot_token",
-        "User-Agent: mc-linterbot"
+        "User-Agent: jhut89/Mailchimp-API-3.0-PHP (https://github.com/Jhut89/Mailchimp-API-3.0-PHP)"
     ];
 
     print "\nReporting linting errors to github for $file_under_test...\n";
