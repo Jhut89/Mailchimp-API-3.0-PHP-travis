@@ -21,7 +21,7 @@ $serialized_comments = curl_exec($ch);
 
 $comments = json_decode($serialized_comments);
 
-if (!$comments) {
+if ($comments === false) {
     print "\nCOULD NOT DESERIALIZE COMMENTS\n";
 }
 
