@@ -34,6 +34,8 @@ if (!empty($comments)) {
             $linter_comment_ids[] = $comment->id;
         }
     }
+} else {
+    print "\nNO COMMENTS WERE FOUND\n";
 }
 
 if (!empty($linter_comment_ids)) {
@@ -53,4 +55,6 @@ if (!empty($linter_comment_ids)) {
             print "\nUNABLE TO DELETE LINTER COMMENT\n";
         }
     }
+} else {
+    print "\nCOULD NOT FIND ANY LINTER COMMENTS\n";
 }

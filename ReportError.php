@@ -19,7 +19,7 @@ foreach ($file_report->files as $file => $report) {
     $comment = "**FILE:** `" . $file_under_test . "` :x:";
     foreach ($report->messages as $message) {
         $comment .= "\n" . "`line: " . $message->line;
-        $comment .= "| message: " . $message->message . "`";
+        $comment .= " | message: " . $message->message . "`";
     }
 
     $request_params = ["body" => $comment];
