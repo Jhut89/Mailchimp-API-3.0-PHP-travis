@@ -7,7 +7,7 @@ $repo_slug = getenv('TRAVIS_REPO_SLUG');
 $pull_request = getenv('TRAVIS_PULL_REQUEST');
 $linter_github_id = getenv('LINTER_USER_ID');
 
-print "Getting Comments";
+print "\nGetting Comments...\n\n";
 
 $auth = [
     "Authorization: token $linter_bot_token",
@@ -34,13 +34,16 @@ if (!empty($comments)) {
             $linter_comment_ids[] = $comment->id;
         }
     }
+    print_r($linter_comment_ids);
 } else {
     print "\nNO COMMENTS WERE FOUND\n";
 }
 
 if (!empty($linter_comment_ids)) {
+    print "\nDELETING LINTER COMMENTS...\n";
     foreach ($linter_comment_ids as $comment_id) {
         $handle = curl_init("https://api.github.com/repos/" . $repo_slug . "/issues/" . $pull_request . "/comments/" . $comment_id);
+        print "\n https://api.github.com/repos/" . $repo_slug . "/issues/" . $pull_request . "/comments/" . $comment_id . "\n";
         curl_setopt($handle, CURLOPT_HTTPHEADER, $auth);
         curl_setopt($handle, CURLOPT_HEADER, true);
         curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "DELETE");
