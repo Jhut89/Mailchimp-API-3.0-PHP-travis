@@ -25,29 +25,28 @@ if ($comments === false) {
     print "\nCOULD NOT DESERIALIZE COMMENTS\n";
 }
 
-$linter_comment_ids = [];
+$linter_comment_urls = [];
 
 // if the response was not an empty array get linters comments from the array
 if (!empty($comments)) {
     foreach ($comments as $comment) {
         if ($comment->user->id == $linter_github_id) {
-            $linter_comment_ids[] = $comment->id;
+            $linter_comment_urls[] = $comment->url;
         }
     }
-    print_r($linter_comment_ids);
 } else {
     print "\nNO COMMENTS WERE FOUND\n";
 }
 
-if (!empty($linter_comment_ids)) {
+if (!empty($linter_comment_urls)) {
     print "\nDELETING LINTER COMMENTS...\n";
-    foreach ($linter_comment_ids as $comment_id) {
-        $handle = curl_init("https://api.github.com/repos/" . $repo_slug . "/issues/" . $pull_request . "/comments/" . $comment_id);
-        print "\n https://api.github.com/repos/" . $repo_slug . "/issues/" . $pull_request . "/comments/" . $comment_id . "\n";
+    foreach ($linter_comment_urls as $comment_url) {
+        $handle = curl_init($comment_url);
+        print "$comment_url";
         curl_setopt($handle, CURLOPT_HTTPHEADER, $auth);
         curl_setopt($handle, CURLOPT_HEADER, true);
         curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "DELETE");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        //curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($handle);
 
         $http_code = intval(curl_getinfo($handle, CURLINFO_HTTP_CODE));
