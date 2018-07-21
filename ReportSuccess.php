@@ -85,7 +85,7 @@ $serialized_label = json_encode(["Linter Approved"]);
 $label_handle = curl_init("https://api.github.com/repos/" . $repo_slug . "/issues/" . $pull_request . "/labels");
 curl_setopt($label_handle, CURLOPT_HTTPHEADER, $auth);
 curl_setopt($label_handle, CURLOPT_HEADER, true);
-curl_setopt($label_handle, CURLOPT_RETURNTRANSFER, true);
+//curl_setopt($label_handle, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($label_handle, CURLOPT_POST, true);
 curl_setopt($label_handle, CURLOPT_POSTFIELDS, $serialized_label);
 $response = curl_exec($label_handle);
