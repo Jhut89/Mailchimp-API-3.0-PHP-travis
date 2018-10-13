@@ -30,6 +30,9 @@ $linter_comment_urls = [];
 // if the response was not an empty array get linters comments from the array
 if (!empty($comments)) {
     foreach ($comments as $comment) {
+        if (!isset($comment->user->id)) {
+            continue;
+        }
         if ($comment->user->id == $linter_github_id) {
             $linter_comment_urls[] = $comment->url;
         }
