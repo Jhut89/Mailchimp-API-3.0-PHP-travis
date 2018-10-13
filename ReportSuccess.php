@@ -80,6 +80,8 @@ $http_code = intval(curl_getinfo($apology_handle, CURLINFO_HTTP_CODE));
 if ($http_code > 199 && $http_code < 300) {
     print "\nLint Wizard Apologized...\n";
 } else {
+    print "Github responded with a non 200 range status code when attempting to apologize.\n\n";
+    print var_dump($response);
     print "\nUnable to Apologize\n";
 }
 
@@ -98,5 +100,7 @@ $http_code = intval(curl_getinfo($label_handle, CURLINFO_HTTP_CODE));
 if ($http_code > 199 && $http_code < 300) {
     print "\nApplied Linter Label...\n";
 } else {
+    print "Github responded with a non 200 range status code when attempting to label.\n\n";
+    print var_dump($response);
     print "\nUnable to Apply Linter Label\n";
 }
